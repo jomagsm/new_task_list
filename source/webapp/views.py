@@ -78,3 +78,25 @@ class UpdateTemplateView(TemplateView):
                 'task': task,
                 'form': form
             })
+
+
+class DeleteTemplateView(TemplateView):
+    template_name = 'delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        task = get_object_or_404(Task, pk=pk)
+        context['task'] = task
+        return context
+
+    def post(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        task = get_object_or_404(Task, pk=pk)
+        task.delete()
+        return redirect('index')
+
+def multi_delete(request):
+    data= request.POST.getlist('id')
+    Task.objects.filter(pk__in=data).delete()
+    return redirect('index')

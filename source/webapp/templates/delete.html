@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Delete Article{% endblock %}
+{% block title %}Delete Task{% endblock %}
 {% block content %}
     <div class="col-9">
-    <p class="text-center mt-5">Are you sure want to delete article "{{ article }}"?</p>
-    <form method="POST" action="{% url "delete" article.pk %}" class="text-center">
+    <p class="text-center mt-5">Are you sure want to delete article "{{ task }}"?</p>
+    <form method="POST" action="{% url "delete_task" task.pk %}" class="text-center">
         {% csrf_token %}
         <p><input class=" btn btn-outline-dark btn-sm mb-1 mr-2" type="submit" value="Confirm">
-        <a class=" btn btn-outline-dark btn-sm mb-1 mr-2" href=" {% url 'find' article.pk %}" role="button">Cancel
+        <a class=" btn btn-outline-dark btn-sm mb-1 mr-2" href=" {% url 'view' task.pk %}" role="button">Cancel
         </a></p>
 {#            <p><a href="{% url "find" article.pk %}">Cancel</a></p>#}
     </form>

@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from webapp.views import IndexTemplateView, ViewTemplateView, TaskCreateView, UpdateTemplateView
+from webapp.views import IndexTemplateView, ViewTemplateView, TaskCreateView, UpdateTemplateView, DeleteTemplateView, \
+    multi_delete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexTemplateView.as_view(), name='index'),
     path('view/<int:pk>/', ViewTemplateView.as_view(), name='view'),
     path('add_task', TaskCreateView.as_view(), name='add_task'),
-    path('update_task/<int:pk>', UpdateTemplateView.as_view(), name='update_task')
+    path('update_task/<int:pk>', UpdateTemplateView.as_view(), name='update_task'),
+    path('delete_task/<int:pk>', DeleteTemplateView.as_view(), name='delete_task'),
+    path('multi_delete/', multi_delete, name='multi_delete')
 ]
