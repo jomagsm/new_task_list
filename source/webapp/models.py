@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+STATUS_CHOICE = [('new', 'Новая'), ('in_progress', 'В процессе'),  ('done', 'Сделано')]
+TYPE_CHOICE = [('Task', 'Задача'), ('Bug', 'Ошибка'), ('Enhancement', 'Улучшение')]
 
 
 class Status(models.Model):
@@ -7,10 +9,14 @@ class Status(models.Model):
 
     def __str__(self): return self.name
 
+STATUS_CHOICE2 = [Status.objects.all()]
+
 class Task_type(models.Model):
     name = models.CharField(max_length=15, verbose_name='Тип')
 
     def __str__(self): return self.name
+
+TYPE_CHOICE2 = [Task_type.objects.all()]
 
 class Task(models.Model):
     summary = models.CharField(max_length=200, null=False, blank=False, verbose_name='Заголовок')
