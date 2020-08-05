@@ -25,6 +25,7 @@ class ViewTemplateView(TemplateView):
         context['task'] = task
         return context
 
+
 class TaskCreateView(View):
     def get(self, request):
         return render(request,'add_new.html', context={'form': TaskForm()})
@@ -42,4 +43,38 @@ class TaskCreateView(View):
         else:
             return render(request, 'add_new.html', context={
                 'form': form,
+            })
+
+
+class UpdateTemplateView(TemplateView):
+    template_name = 'edit.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        task = get_object_or_404(Task, pk=pk)
+        form = TaskForm(initial={
+            "summary": task.summary,
+            "description": task.description,
+            "status": task.status,
+            "type_task": task.type_task})
+        context['task'] = task
+        context['form'] = form
+        return context
+
+    def post(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        task = get_object_or_404(Task, pk=pk)
+        form = TaskForm(data=request.POST)
+        if form.is_valid():
+            task.summary = form.cleaned_data['summary']
+            task.description = form.cleaned_data['description']
+            task.status = form.cleaned_data['status']
+            task.type_task = form.cleaned_data['type_task']
+            task.save()
+            return redirect('view', pk=task.pk)
+        else:
+            return self.render_to_response(context={
+                'task': task,
+                'form': form
             })
