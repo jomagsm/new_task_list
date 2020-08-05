@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}View{% endblock %}
+
+{% block menu %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'article_new' %}">Добавить задачу <span class="sr-only">(current)</span></a>
+      </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'delete' article.pk %}">Удалить задачу <span class="sr-only">(current)</span></a>
+      </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'edit' article.pk %}">Редактировать задачу <span class="sr-only">(current)</span></a>
+      </li>
+{% endblock %}
+{% block content %}
+<h1>{{ article.name }}</h1>
+    <p class="description">Описание :{{ article.description }}</p>
+<p>Статус: {{ article.get_status_display }}</p>
+<p> Дата выполнения {{ article.create_at }} </p>
+{% endblock %}

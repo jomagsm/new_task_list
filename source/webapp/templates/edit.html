@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Task{% endblock %}
+{% block content %}
+<div class="col-6">
+<form action="{% url 'edit' article.pk %}" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    {% include 'partial/article_form.html' with form=field %}
+    {% endfor %}
+{#    {% include 'partial/article_form.html' with form=form.name %}#}
+{#    {% include 'partial/article_form.html' with form=form.description %}#}
+{#    {% include 'partial/article_form.html' with form=form.status %}#}
+{#    {% include 'partial/article_form.html' with form=form.create_at %}#}
+    <input type="submit" value="Сохранить изменение">
+</form>
+</div>
+{% endblock %}
