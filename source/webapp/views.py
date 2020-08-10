@@ -34,33 +34,16 @@ class TaskCreateView(FormView):
         self.task = Task.objects.create(
             summary=form.cleaned_data['summary'],
             description=form.cleaned_data['description'],
-            status=form.cleaned_data['status'],
-            type_task=form.cleaned_data['type_task']
+            status=form.cleaned_data['status']
         )
+        type_task = form.cleaned_data['type_task']
+        self.task.type_task.set(type_task)
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('view', kwargs={'pk': self.task.pk})
 
 
-# class TaskCreateView(View):
-#     def get(self, request):
-#         return render(request,'add_new.html', context={'form': TaskForm()})
-#
-#     def post(self, request):
-#         form = TaskForm(data=request.POST)
-#         if form.is_valid():
-#             task = Task.objects.create(
-#                 summary=form.cleaned_data['summary'],
-#                 description=form.cleaned_data['description'],
-#                 status=form.cleaned_data['status'],
-#                 type_task=form.cleaned_data['type_task']
-#                 )
-#             return redirect('view', pk=task.pk)
-#         else:
-#             return render(request, 'add_new.html', context={
-#                 'form': form,
-#             })
 class UpdateTemplateView(FormView):
     template_name = 'edit.html'
     form_class = TaskForm
@@ -76,16 +59,18 @@ class UpdateTemplateView(FormView):
 
     def get_initial(self):
         initial = {}
-        for key in 'summary', 'description', 'status', 'type_task':
+        for key in 'summary', 'description', 'status':
             initial[key] = getattr(self.task, key)
+        initial['type_task'] = self.task.type_task.all()
         return initial
 
     def form_valid(self, form):
         self.task.summary = form.cleaned_data['summary']
         self.task.description = form.cleaned_data['description']
         self.task.status = form.cleaned_data['status']
-        self.task.type_task = form.cleaned_data['type_task']
+        type_task = form.cleaned_data.pop('type_task')
         self.task.save()
+        self.task.type_task.set(type_task)
         # tags = form.cleaned_data.pop('tags')
         # for key, value in form.cleaned_data.items():
         #     if value is not None:
