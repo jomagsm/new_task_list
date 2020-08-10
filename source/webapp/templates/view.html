@@ -17,5 +17,6 @@
 <h1>{{ task.summary }}</h1>
     <p class="description">Описание :{{ task.description }}</p>
 <p>Статус: {{ task.status }}</p>
+    <p>Тип: {{ task.type_task }}</p>
 <p> Дата выполнения {{ task.created_at|date:"d.m.Y H:i:s" }} </p>
 {% endblock %}
