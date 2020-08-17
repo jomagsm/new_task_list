@@ -1,20 +1,20 @@
 from webapp.models import Task
 import datetime
 from datetime import date, timedelta
+from django.db.models import F
+from django.db.models import Count
+from django.db.models import Sum
 
 
+now = datetime.datetime.now()
 Task.objects.filter(status__name='Done',updated_at__gte=(now.date()-timedelta(days=31))).values('pk','summary','type_task__name','status__name')
 
 
 
 2)
-qs_1 = Task.objects.filter(status__name='New')
-qs_2 = Task.objects.filter(status__name='Done')
-qs_3 = Task.objects.filter(type_task__name='Task')
-qs_4 = Task.objects.filter(type_task__name='Bug')
-qs_5 = qs_1 | qs_2
-qs_6 = qs_3 | qs_4
-(qs_5 & qs_6).distinct().values('pk','summary','type_task__name','status__name')
+qs_1 = Task.objects.filter(status__name__in=['New','Done'])
+qs_2 = Task.objects.filter(type_task__name__in=['Task','Bug'])
+(qs_1 & qs_2).distinct().values('pk','summary','type_task__name','status__name')
 
 3)
 qs_1 = Task.objects.filter(summary__icontains='Bug')
@@ -22,3 +22,7 @@ qs_2 = Task.objects.filter(type_task__name='Bug')
 qs_3 = Task.objects.exclude(status__name='Done')
 qs_4 = qs_1 | qs_2
 (qs_4 & qs_3).distinct().values('pk','summary','type_task__name','status__name')
+
+Task.objects.filter(summary=F('description'))
+
+Task.objects.all().values('type_task__name').annotate(Count=Count('type_task'))
