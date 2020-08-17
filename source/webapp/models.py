@@ -27,6 +27,7 @@ class Task(models.Model):
     status = models.ForeignKey('webapp.Status', related_name='status', on_delete=models.PROTECT, verbose_name='Статус')
     type_task = models.ManyToManyField('webapp.Task_type', related_name='type', verbose_name='Тип')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
 
     def __str__(self):
         return "{}. {}".format(self.pk, self.summary)

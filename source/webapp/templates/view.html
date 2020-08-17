@@ -19,4 +19,5 @@
 <p>Статус: {{ task.status }}</p>
     <p>Тип: {% for type in  task.type_task.all %} {{ type.name }} {% endfor %}</p>
 <p> Дата выполнения {{ task.created_at|date:"d.m.Y H:i:s" }} </p>
+    <p>Дата изменения: {{ task.updated_at }}</p>
 {% endblock %}
