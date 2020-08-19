@@ -54,3 +54,8 @@ class TaskForm(forms.ModelForm):
         if errors:
             raise ValidationError(errors)
         return summary
+
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label="Найти",
+                             widget=forms.TextInput(attrs={'class': 'form-control'}))
