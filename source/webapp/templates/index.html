@@ -4,6 +4,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
     <h1>To do List!</h1>
     <form action="{% url 'multi_delete'%}" method="POST">
     {% csrf_token %}
@@ -30,4 +33,7 @@
     {% endfor %}
     <input class=" btn btn-outline-dark btn-sm mb-1 mr-2" type="submit" value="Удалить">
     </form>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}
