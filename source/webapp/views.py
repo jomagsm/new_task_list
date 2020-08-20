@@ -3,40 +3,19 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, FormView, ListView
 from django.urls import reverse
 
+from .base_view import SearchView
 from .forms import TaskForm, SimpleSearchForm
 from .models import Task
 
 
-class IndexTemplateView(ListView):
+class IndexTemplateView(SearchView):
     template_name = 'index.html'
     context_object_name = 'tasks'
+    model = Task
     paginate_by = 5
     paginate_orphans = 2
+    search_form = SimpleSearchForm
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        form = SimpleSearchForm(data=self.request.GET)
-        if form.is_valid():
-            search = form.cleaned_data['search']
-            kwargs['search'] = search
-        kwargs['form'] = form
-        return super().get_context_data(object_list=object_list, **kwargs)
-
-    def get_queryset(self):
-        tasks = Task.objects.all()
-        search = self.request.GET.get('search')
-        form = SimpleSearchForm(data=self.request.GET)
-        if form.is_valid():
-            search = form.cleaned_data['search']
-            if search:
-                    tasks = tasks.filter(Q(summary__icontains=search) | Q(description__icontains=search))
-        return tasks
-
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     tasks = Task.objects.all()
-    #     context['tasks'] = tasks
-    #     return context
 
 
 class ViewTemplateView(TemplateView):
