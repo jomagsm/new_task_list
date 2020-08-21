@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 from django.contrib import admin
 
-from webapp.models import Status, Task_type, Task
+from webapp.models import Status, Task_type, Task, Project
 
 
 class StatusAdmin(admin.ModelAdmin):
@@ -15,3 +15,4 @@ class Task_typeAdmin(admin.ModelAdmin):
 admin.site.register(Status, StatusAdmin)
 admin.site.register(Task_type, Task_typeAdmin)
 admin.site.register(Task)
+admin.site.register(Project)
