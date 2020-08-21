@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Add new Project{% endblock %}
+{% block content %}
+<div class="col-6">
+<form action="{% url 'create_project' %}" method="POST">
+    {% csrf_token %}
+{% for error in form.non_field_errors %}
+    <p class="error">{{ error }}</p>
+{% endfor %}
+{% for field in form %}
+    {% include 'partial/task_form.html' with form=field %}
+    {% endfor %}
+{#{% include 'partial/task_form.html' with form=form.name %}#}
+{#{% include 'partial/task_form.html' with form=form.description %}#}
+{#{% include 'partial/task_form.html' with form=form.status %}#}
+{#{% include 'partial/task_form.html' with form=form.create_at %}#}
+    <input type="submit" value="Добавить Проект">
+</form>
+</div>
+{% endblock %}

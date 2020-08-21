@@ -1,5 +1,8 @@
-from django.views.generic import ListView, DetailView
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse
 
+from webapp.forms import TaskForm
 from webapp.models import Project, Task
 
 
@@ -35,3 +38,26 @@ class ProjectView(DetailView):
         tasks = tasks.filter(project_pk=project.pk)
         context['tasks'] = tasks
         return context
+
+
+class ProjectCreate(CreateView):
+    template_name = 'project/create.html'
+    model = Project
+    fields = ['name', 'description', 'start_date', 'finish_date']
+
+    def get_success_url(self):
+        return reverse('view', kwargs={'pk': self.object.pk})
+
+
+class ArticleCommentCreateView(CreateView):
+    model = Task
+    template_name = 'task/add_new.html'
+    form_class = TaskForm
+
+    def form_valid(self, form):
+        project = get_object_or_404(Task, pk=self.kwargs.get('pk'))
+        task = form.save(commit=False)
+        task.project_pk = project
+        task.save()
+        return redirect('view_task', pk=task.pk)
+
