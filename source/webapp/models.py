@@ -22,7 +22,7 @@ TYPE_CHOICE2 = [Task_type.objects.all()]
 
 
 class Task(models.Model):
-    project_pk = models.ManyToManyField('webapp.Project', related_name='project', verbose_name='Проект')
+    project_pk = models.ForeignKey('webapp.Project', related_name='project', verbose_name='Проект', on_delete=models.CASCADE)
     summary = models.CharField(max_length=200, null=False, blank=False, verbose_name='Заголовок')
     description = models.TextField(max_length= 3000, null=True, blank=True, verbose_name='Описание')
     status = models.ForeignKey('webapp.Status', related_name='status', on_delete=models.PROTECT, verbose_name='Статус')
@@ -31,7 +31,7 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
 
     def __str__(self):
-        return "{}. {}".format(self.pk, self.summary)
+        return "{}. {}".format(self.project_pk, self.pk, self.summary)
 
     class Meta:
         verbose_name = 'Задача'

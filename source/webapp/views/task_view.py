@@ -1,15 +1,14 @@
-from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import TemplateView, FormView, ListView
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import TemplateView, FormView
 from django.urls import reverse
 
-from .base_view import SearchView
-from .forms import TaskForm, SimpleSearchForm
-from .models import Task
+from webapp.views.base_view import SearchView
+from webapp.forms import TaskForm, SimpleSearchForm
+from webapp.models import Task
 
 
 class IndexTemplateView(SearchView):
-    template_name = 'index.html'
+    template_name = 'task/index.html'
     context_object_name = 'tasks'
     model = Task
     paginate_by = 5
@@ -19,7 +18,7 @@ class IndexTemplateView(SearchView):
 
 
 class ViewTemplateView(TemplateView):
-    template_name = 'view.html'
+    template_name = 'task/view.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,7 +28,7 @@ class ViewTemplateView(TemplateView):
         return context
 
 class TaskCreateView(FormView):
-    template_name = 'add_new.html'
+    template_name = 'task/add_new.html'
     form_class = TaskForm
 
     def form_valid(self, form):
@@ -41,7 +40,7 @@ class TaskCreateView(FormView):
 
 
 class UpdateTemplateView(FormView):
-    template_name = 'edit.html'
+    template_name = 'task/edit.html'
     form_class = TaskForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -72,7 +71,7 @@ class UpdateTemplateView(FormView):
 
 
 class DeleteTemplateView(TemplateView):
-    template_name = 'delete.html'
+    template_name = 'task/delete.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

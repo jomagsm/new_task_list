@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from webapp.models import Task, Status, Task_type
+from webapp.models import Task, Status, Task_type, Project
 
 INVALID_SIMVOLS= '~@#$%^-_(){}'''
 
@@ -59,3 +59,14 @@ class TaskForm(forms.ModelForm):
 class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label="Найти",
                              widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class ProjectForm(forms.ModelForm):
+
+    class Meta:
+        model = Project
+        fields = ['name', 'description', 'start_date', 'finish_date']
+        widgets = {'name': forms.TextInput(attrs={'class': "form-control"}),
+                   'description': forms.Textarea(attrs={'class': "form-control"}),
+                   'start_date': forms.DateField,
+                   'finish_date': forms.DateField}
