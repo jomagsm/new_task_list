@@ -1,3 +1,4 @@
+Зашел Зашел Зашел
 [
 {
   "model": "webapp.status",
@@ -45,6 +46,7 @@
   "model": "webapp.task",
   "pk": 1,
   "fields": {
+    "project_pk": 1,
     "summary": "Work Django",
     "description": "Test kdsfl.mfgdh\r\nfdghgfdh\r\ndfghdfgh\r\n\r\nsdfgsf\r\ngfhsffgh\r\nsdfgdff",
     "status": 2,
@@ -59,6 +61,7 @@
   "model": "webapp.task",
   "pk": 2,
   "fields": {
+    "project_pk": 1,
     "summary": "Problem django",
     "description": "dsfafsddfas\r\nafddsafds\r\nasdfadsfd",
     "status": 2,
@@ -73,6 +76,7 @@
   "model": "webapp.task",
   "pk": 4,
   "fields": {
+    "project_pk": 1,
     "summary": "New Bug",
     "description": "xcmxmxmvkklsdkfj",
     "status": 1,
@@ -87,6 +91,7 @@
   "model": "webapp.task",
   "pk": 5,
   "fields": {
+    "project_pk": 1,
     "summary": "In Pgoress Task",
     "description": "sdfgdfsfgdsgsd",
     "status": 2,
@@ -101,6 +106,7 @@
   "model": "webapp.task",
   "pk": 6,
   "fields": {
+    "project_pk": 1,
     "summary": "Done Task",
     "description": "sdfsadfd",
     "status": 3,
@@ -115,6 +121,7 @@
   "model": "webapp.task",
   "pk": 7,
   "fields": {
+    "project_pk": 1,
     "summary": "Test2",
     "description": "dsffsdf2",
     "status": 2,
@@ -129,6 +136,7 @@
   "model": "webapp.task",
   "pk": 10,
   "fields": {
+    "project_pk": 1,
     "summary": "Test22222232434",
     "description": "dfgdafgdfs.  222223423423",
     "status": 2,
@@ -143,6 +151,7 @@
   "model": "webapp.task",
   "pk": 11,
   "fields": {
+    "project_pk": 1,
     "summary": "Test",
     "description": "gery",
     "status": 1,
@@ -159,6 +168,7 @@
   "model": "webapp.task",
   "pk": 12,
   "fields": {
+    "project_pk": 1,
     "summary": "Test334534",
     "description": "345dfgd jhgjghhj\r\nythjtyjy",
     "status": 2,
@@ -173,6 +183,7 @@
   "model": "webapp.task",
   "pk": 13,
   "fields": {
+    "project_pk": 1,
     "summary": "Bug Bug Bug BUG BUG",
     "description": "Bug test bug test teedlsflkjlkj\r\nfsdlgkjlkfdsjg\r\ndfsglkjfdsklgj",
     "status": 3,
@@ -188,6 +199,7 @@
   "model": "webapp.task",
   "pk": 14,
   "fields": {
+    "project_pk": 1,
     "summary": "Summary Description",
     "description": "Summary Description",
     "status": 3,
@@ -199,11 +211,106 @@
   }
 },
 {
+  "model": "webapp.task",
+  "pk": 15,
+  "fields": {
+    "project_pk": 1,
+    "summary": "Testdsgdfdfsdgfgfghshsfddfg",
+    "description": "sdfsdfsdgsgdsdgsdgggsdsdgdsfggdfsgd",
+    "status": 1,
+    "created_at": "2020-08-21T15:00:06.819Z",
+    "updated_at": "2020-08-21T17:01:05.459Z",
+    "type_task": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 16,
+  "fields": {
+    "project_pk": 3,
+    "summary": "TestTestTest",
+    "description": "Test33333333333333333Test33333333333333333Test33333333333333333Test33333333333333333",
+    "status": 2,
+    "created_at": "2020-08-22T09:56:15.394Z",
+    "updated_at": "2020-08-22T09:56:15.394Z",
+    "type_task": []
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 17,
+  "fields": {
+    "project_pk": 3,
+    "summary": "TestTestTestTestTestTestTestTestTest",
+    "description": "TestTestTestTestTestTestTestTestTestTestTestTestTest",
+    "status": 3,
+    "created_at": "2020-08-22T09:58:21.256Z",
+    "updated_at": "2020-08-22T09:58:21.256Z",
+    "type_task": []
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 18,
+  "fields": {
+    "project_pk": 3,
+    "summary": "Work DjangoWork DjangoWork DjangoWork DjangoWork DjangoWork Django",
+    "description": "Work DjangoWork DjangoWork DjangoWork DjangoWork DjangoWork DjangoWork DjangoWork DjangoWork DjangoWork Django",
+    "status": 3,
+    "created_at": "2020-08-22T09:59:44.984Z",
+    "updated_at": "2020-08-22T09:59:44.984Z",
+    "type_task": []
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 1,
+  "fields": {
+    "start_date": null,
+    "finish_date": null,
+    "name": "Test Project",
+    "description": "Teste Projects"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 3,
+  "fields": {
+    "start_date": "2020-05-10",
+    "finish_date": "2010-05-11",
+    "name": "Test2",
+    "description": "Test2Test2Test2Test2"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 4,
+  "fields": {
+    "start_date": "2020-05-10",
+    "finish_date": "2010-05-11",
+    "name": "Test2",
+    "description": "Test2Test2Test2Test2"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 5,
+  "fields": {
+    "start_date": null,
+    "finish_date": null,
+    "name": "dsfdsfsdsfddsfdfsfsddsf",
+    "description": "sdfdsffsdbgdffsefdsgdfsgfds"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$150000$FElQQ4SG4NRr$HKS+lHYe4wupGRo3OCbqDrA2TBqtQS/Cbq6aO24uBdE=",
-    "last_login": "2020-08-04T14:47:27.978Z",
+    "last_login": "2020-08-21T14:38:17.112Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",

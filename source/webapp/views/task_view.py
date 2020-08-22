@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, CreateView
 from django.urls import reverse
 
 from webapp.views.base_view import SearchView
 from webapp.forms import TaskForm, SimpleSearchForm
-from webapp.models import Task
+from webapp.models import Task, Project
 
 
 class IndexTemplateView(SearchView):
@@ -90,3 +90,41 @@ def multi_delete(request):
     data= request.POST.getlist('id')
     Task.objects.filter(pk__in=data).delete()
     return redirect('index')
+
+
+# class ProjectTaskCreateView(CreateView):
+#     template_name = 'task/add_new.html'
+#     model = Task
+#     # fields = ['summary', 'description', 'status', 'type_task', 'created_at', 'updated_at']
+#     form_class = TaskForm
+#
+#     def get_success_url(self):
+#         return reverse('view_task', kwargs={'pk': self.object.pk})
+
+class ProjectTaskCreateView(CreateView):
+    print('Зашел Зашел Зашел')
+    model = Task
+    template_name = 'task/add_new.html'
+    form_class = TaskForm
+
+    def form_valid(self, form):
+        print(form)
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        task = form.save(commit=False)
+        task.project_pk = project
+        task.save()
+        return redirect('view', pk=project.pk)
+
+
+# class ProjectTaskCreateView(CreateView):
+#     model = Task
+#     template_name = 'task/add_new.html'
+#     form_class = TaskForm
+#     print('PFOTKKKKKKKDSFKLSJDGFKLSJDGL')
+#
+#     def form_valid(self, form):
+#         project = get_object_or_404(Task, pk=self.kwargs.get('pk'))
+#         task = form.save(commit=False)
+#         task.project_pk = project
+#         task.save()
+#         return redirect('view_task', pk=task.pk)

@@ -49,15 +49,16 @@ class ProjectCreate(CreateView):
         return reverse('view', kwargs={'pk': self.object.pk})
 
 
-class ArticleCommentCreateView(CreateView):
-    model = Task
-    template_name = 'task/add_new.html'
-    form_class = TaskForm
 
-    def form_valid(self, form):
-        project = get_object_or_404(Task, pk=self.kwargs.get('pk'))
-        task = form.save(commit=False)
-        task.project_pk = project
-        task.save()
-        return redirect('view_task', pk=task.pk)
+# class ArticleCommentCreateView(CreateView):
+#     model = Task
+#     template_name = 'task/add_new.html'
+#     form_class = TaskForm
+#
+#     def form_valid(self, form):
+#         project = get_object_or_404(Task, pk=self.kwargs.get('pk'))
+#         task = form.save(commit=False)
+#         task.project_pk = project
+#         task.save()
+#         return redirect('view_task', pk=task.pk)
 

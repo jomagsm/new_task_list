@@ -18,7 +18,7 @@ from django.urls import path
 
 from webapp.views import IndexView, ProjectView, ProjectCreate
 from webapp.views.task_view import IndexTemplateView, ViewTemplateView, TaskCreateView, UpdateTemplateView, DeleteTemplateView, \
-    multi_delete
+    multi_delete, ProjectTaskCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,8 +26,9 @@ urlpatterns = [
     # path('', IndexTemplateView.as_view(), name='index'),
     path('project_add',ProjectCreate.as_view(),name='create_project'),
     path('view_task/<int:pk>/', ViewTemplateView.as_view(), name='view_task'),
-    path('view/<int:pk>',ProjectView.as_view(),name='view'),
-    path('add_task', TaskCreateView.as_view(), name='add_task'),
+    path('view/<int:pk>/', ProjectView.as_view(),name='view'),
+    path('view/<int:pk>/task/add', ProjectTaskCreateView.as_view(), name='add_task'),
+    # path('add_task', TaskCreateView.as_view(), name='add_task'),
     path('update_task/<int:pk>', UpdateTemplateView.as_view(), name='update_task'),
     path('delete_task/<int:pk>', DeleteTemplateView.as_view(), name='delete_task'),
     path('multi_delete/', multi_delete, name='multi_delete')
