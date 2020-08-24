@@ -102,13 +102,11 @@ def multi_delete(request):
 #         return reverse('view_task', kwargs={'pk': self.object.pk})
 
 class ProjectTaskCreateView(CreateView):
-    print('Зашел Зашел Зашел')
     model = Task
     template_name = 'task/add_new.html'
     form_class = TaskForm
 
     def form_valid(self, form):
-        print(form)
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
         task = form.save(commit=False)
         task.project_pk = project

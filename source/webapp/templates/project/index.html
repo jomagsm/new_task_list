@@ -10,9 +10,9 @@
 {#</form>#}
 {% endblock %}
 {% block content %}
-{#    {% if is_paginated %}#}
-{#        {% include 'partial/pagination.html' %}#}
-{#    {% endif %}#}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
     <h1>Projects!</h1>
 {#    <form action="{% url 'multi_delete'%}" method="POST">#}
     {% csrf_token %}

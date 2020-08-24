@@ -21,6 +21,9 @@
     {% if project.finish_date %}<p>Дата окончания: {{ project.finish_date }}</p>{% endif %}
     <h3>Задачи:</h3>
     <div class="task-list">
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
         {% for task in tasks %}
             <div class="task">
                 <a href="{% url 'view_task' task.pk %}"> {{ task.summary }} | {{ task.status }}</a>

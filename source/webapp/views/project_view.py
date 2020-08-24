@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse
@@ -9,7 +10,7 @@ from webapp.models import Project, Task
 class IndexView(ListView):
     template_name = 'project/index.html'
     context_object_name = 'projects'
-    paginate_by = 2
+    paginate_by = 5
     paginate_orphans = 0
 
     def get_queryset(self):
@@ -30,6 +31,8 @@ class IndexView(ListView):
 class ProjectView(DetailView):
     template_name = 'project/view.html'
     model = Project
+    paginate_by = 5
+    paginate_orphans = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -38,6 +41,36 @@ class ProjectView(DetailView):
         tasks = tasks.filter(project_pk=project.pk)
         context['tasks'] = tasks
         return context
+
+
+# class ProjectView(DetailView):
+#     template_name = 'project/view.html'
+#     model = Project
+#     paginate_by = 5
+#     paginate_orphans = 2
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         tasks, page, is_paginated = self.paginate_tasks(self.object)
+#         # tasks = Task.objects.all()
+#         # project = self.object
+#         # tasks = tasks.filter(project_pk=project.pk)
+#         context['tasks'] = tasks
+#         context['page_obj'] = page
+#         context['is_paginated'] = is_paginated
+#         return context
+#
+#     def paginate_tasks(self, project):
+#         tasks = project.task.all()
+#         if tasks.count() > 0:
+#             paginator = Paginator(tasks, self.paginate_by, orphans=self.paginate_orphans)
+#             page_number = self.request.GET.get('page', 1)
+#             page = paginator.get_page(page_number)
+#             is_paginated = paginator.num_pages > 1  # page.has_other_pages()
+#             return page.object_list, page, is_paginated
+#         else:
+#             return tasks, None, False
+#
 
 
 class ProjectCreate(CreateView):
@@ -62,3 +95,31 @@ class ProjectCreate(CreateView):
 #         task.save()
 #         return redirect('view_task', pk=task.pk)
 
+
+#
+# class ProjectView(DetailView):
+#     template_name = 'project/view.html'
+#     model = Project
+#     paginate_tasks_by = 2
+#     paginate_tasks_orphans = 0
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         tasks, page, is_paginated = self.paginate_tasks(self.object)
+#
+#         context['tasks'] = tasks
+#         context['page_obj'] = page
+#         context['is_paginated'] = is_paginated
+#         return context
+#
+#     def paginate_tasks(self, project):
+#         tasks = project.tasks.all()
+#         if tasks.count() > 0:
+#             paginator = Paginator(tasks, self.paginate_tasks_by, orphans=self.paginate_tasks_orphans)
+#             page_number = self.request.GET.get('page', 1)
+#             page = paginator.get_page(page_number)
+#             is_paginated = paginator.num_pages > 1  # page.has_other_pages()
+#             return page.object_list, page, is_paginated
+#         else:
+#             return tasks, None, False
+#
