@@ -29,6 +29,7 @@ class Task(models.Model):
     type_task = models.ManyToManyField('webapp.Task_type', related_name='type', verbose_name='Тип')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
+    is_deleted = models.BooleanField(default=False,verbose_name='Мягкое удаление')
 
     def __str__(self):
         return "{}. {}".format(self.project_pk, self.pk, self.summary)
@@ -39,7 +40,7 @@ class Task(models.Model):
 
 
 class Project(models.Model):
-    start_date = models.DateField(null=True, blank=True, verbose_name='Дата начала')
+    start_date = models.DateField(verbose_name='Дата начала')
     finish_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
     name = models.CharField(max_length=200, null=False, blank=False, verbose_name='Название')
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Описание')

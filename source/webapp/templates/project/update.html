@@ -1,0 +1,33 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block title %}Update{% endblock %}#}
+{##}
+{#{% block menu %}#}
+{#    <li><a href="{% url 'view' project.pk %}">Отмена</a></li>#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#    <h1>Update Project</h1>#}
+{##}
+{#    {% url "project_update" pk=project.pk as action_url %}#}
+{#    {% include 'partial/task_form.html' with action_url=action_url form_method='post' button_text='Update' %}#}
+{#{% endblock %}#}
+
+
+{% extends 'base.html' %}
+
+{% block title %}Update{% endblock %}
+{% block content %}
+<div class="col-6">
+<form action="{% url 'update_project' project.pk %}" method="POST">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    {% for field in form %}
+    {% include 'partial/task_form.html' with form=field %}
+    {% endfor %}
+    <input type="submit" value="Сохранить изменение">
+</form>
+</div>
+{% endblock %}
