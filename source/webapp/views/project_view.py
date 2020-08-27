@@ -61,7 +61,7 @@ class ProjectView(DetailView):
         return context
 
     def paginate_tasks(self, project):
-        tasks = project.project.all()
+        tasks = project.project.all().filter(is_deleted=False)
         if tasks.count() > 0:
             paginator = Paginator(tasks, self.paginate_by, orphans=self.paginate_orphans)
             page_number = self.request.GET.get('page', 1)

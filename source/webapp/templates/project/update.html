@@ -17,6 +17,11 @@
 {% extends 'base.html' %}
 
 {% block title %}Update{% endblock %}
+{% block menu %}
+    <li class="nav-item active">
+                <a class="nav-link" href="{% url 'view' project.pk %}">Отмена <span class="sr-only">(current)</span></a>
+              </li>
+{% endblock %}
 {% block content %}
 <div class="col-6">
 <form action="{% url 'update_project' project.pk %}" method="POST">

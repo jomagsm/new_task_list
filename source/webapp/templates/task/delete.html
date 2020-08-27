@@ -6,7 +6,7 @@
     <form method="POST" action="{% url "delete_task" task.pk %}" class="text-center">
         {% csrf_token %}
         <p><input class=" btn btn-outline-dark btn-sm mb-1 mr-2" type="submit" value="Confirm">
-        <a class=" btn btn-outline-dark btn-sm mb-1 mr-2" href=" {% url 'view' task.pk %}" role="button">Cancel
+        <a class=" btn btn-outline-dark btn-sm mb-1 mr-2" href=" {% url 'view_task' task.pk %}" role="button">Cancel
         </a></p>
 {#            <p><a href="{% url "find" article.pk %}">Cancel</a></p>#}
     </form>

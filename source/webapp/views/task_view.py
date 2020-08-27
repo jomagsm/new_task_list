@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import TemplateView, FormView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
@@ -24,6 +24,8 @@ class ViewTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk')
         task = get_object_or_404(Task, pk=pk)
+        if task.is_deleted:
+            raise Http404('Неииеиеие')
         context['task'] = task
         return context
 
@@ -53,12 +55,14 @@ class DeleteTemplateView(DeleteView):
     template_name = 'task/delete.html'
     model = Task
 
+    # def get_success_url(self):
+    #     return reverse('view', kwargs={'pk': self.object.project_pk.pk})
+
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.is_deleted = True
         self.object.save()
-        return HttpResponseRedirect('project/view.html', self.object.project_pk.pk)
-
+        return redirect('view', pk=self.object.project_pk.pk)
 
 def multi_delete(request):
     data= request.POST.getlist('id')

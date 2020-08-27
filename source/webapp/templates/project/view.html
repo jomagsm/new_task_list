@@ -4,14 +4,13 @@
 
 {% block menu %}
     <li class="nav-item active">
-        <a class="nav-link" href="{% url 'add_task' project.pk %}">Добавить задачу <span class="sr-only">(current)</span></a>
-        {#        <a class="nav-link" href="{% url 'article_new' %}">Добавить задачу <span class="sr-only">(current)</span></a>#}
-        {#      </li>#}
-        {#    <li class="nav-item active">#}
-        {#        <a class="nav-link" href="{% url 'delete' article.pk %}">Удалить задачу <span class="sr-only">(current)</span></a>#}
-        {#      </li>#}
-        {#    <li class="nav-item active">#}
-        {#        <a class="nav-link" href="{% url 'edit' article.pk %}">Редактировать задачу <span class="sr-only">(current)</span></a>#}
+        <a class="nav-link" href="{% url 'add_task' project.pk %}">Добавить проект <span class="sr-only">(current)</span></a>
+      </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'delete_project' project.pk %}">Удалить проект <span class="sr-only">(current)</span></a>
+              </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'update_project' project.pk %}">Редактировать проект <span class="sr-only">(current)</span></a>
     </li>
 {% endblock %}
 {% block content %}
