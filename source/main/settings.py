@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'webapp',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = 'index_project'
+LOGOUT_REDIRECT_URL = 'index_project'

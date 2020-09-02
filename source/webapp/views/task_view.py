@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import TemplateView, FormView, CreateView, UpdateView, DeleteView
@@ -30,7 +31,7 @@ class ViewTemplateView(TemplateView):
         return context
 
 
-class TaskCreateView(FormView):
+class TaskCreateView(LoginRequiredMixin,FormView):
     template_name = 'task/add_new.html'
     form_class = TaskForm
 
@@ -42,7 +43,7 @@ class TaskCreateView(FormView):
         return reverse('view', kwargs={'pk': self.task.pk})
 
 
-class UpdateTemplateView(UpdateView):
+class UpdateTemplateView(LoginRequiredMixin,UpdateView):
     template_name = 'task/edit.html'
     form_class = TaskForm
     model = Task
@@ -51,7 +52,7 @@ class UpdateTemplateView(UpdateView):
         return reverse('view_task', kwargs={'pk': self.object.pk})
 
 
-class DeleteTemplateView(DeleteView):
+class DeleteTemplateView(LoginRequiredMixin,DeleteView):
     template_name = 'task/delete.html'
     model = Task
 
@@ -70,7 +71,7 @@ def multi_delete(request):
     return redirect('index')
 
 
-class ProjectTaskCreateView(CreateView):
+class ProjectTaskCreateView(LoginRequiredMixin,CreateView):
     model = Task
     template_name = 'task/add_new.html'
     form_class = TaskForm

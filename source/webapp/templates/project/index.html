@@ -18,6 +18,7 @@
     {% csrf_token %}
         {% for project in projects%}
         <input class="ml-4" type="checkbox" name="id" value="{{ project.pk }}">
+            {% if request.user.is_authenticated %}
         <a class=" btn btn-outline-dark btn-sm mb-1 mr-2" href=" {% url 'delete_project' project.pk %}" role="button">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
@@ -35,6 +36,7 @@
                       d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
             </svg>
         </a>
+            {% endif %}
         <a href="{% url 'view' project.pk %}"> {{ project.name }} | {{ project.description }}</a><br>
     {% endfor %}
     <input class=" btn btn-outline-dark btn-sm mb-1 mr-2" type="submit" value="Удалить">
