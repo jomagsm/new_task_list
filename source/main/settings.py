@@ -102,6 +102,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# TEMPLATE_CONTEXT_PROCESSORS = {
+#     "django.core.context_processors.auth",
+#     "django.core.context_processors.debug",
+#     "django.core.context_processors.i18n",
+#     "django.core.context_processors.media",
+#     "django.core.context_processors.request",
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -122,5 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'index_project'
-LOGOUT_REDIRECT_URL = 'index_project'
+LOGIN_REDIRECT_URL = 'webapp:index_project'
+LOGOUT_REDIRECT_URL = 'webapp:index_project'
+
+LOGIN_URL = 'accounts:login'

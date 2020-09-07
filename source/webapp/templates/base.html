@@ -13,18 +13,24 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'index_project' %}">Главная <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'webapp:index_project' %}">Главная <span class="sr-only">(current)</span></a>
       </li>
         {% block menu %}
         {% endblock %}
         {% if request.user.is_authenticated %}
             <li class="nav-item active">
-            <a class="nav-link" href="{% url 'create_project'%}">Создать проект<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'webapp:create_project'%}">Создать проект<span class="sr-only">(current)</span></a>
 {#        <a class="nav-link" href="{% url 'add_task' %}">Добавить задачу <span class="sr-only">(current)</span></a>#}
                 </li>
-                    <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    <li><a class="nav-link" href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
                 {% else %}
-                    <li><a class="nav-link" href="{% url 'login' %}">Login</a> </li>
+                    {% if request.GET.next %}
+                        <li><a class="nav-link" href="{% url 'accounts:login' %}?next={{ request.GET.next }}">Login</a> </li>
+                        <li><a class="nav-link" href="{% url 'accounts:create' %}?next={{ request.GET.next }}">Регистрация</a> </li>
+                    {% else %}
+                        <li><a class="nav-link" href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a> </li>
+                        <li><a class="nav-link" href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Регистрация</a> </li>
+                    {% endif %}
                 {% endif %}
     </ul>
   {% block search %} {% endblock %}

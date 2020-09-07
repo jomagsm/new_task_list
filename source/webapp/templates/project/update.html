@@ -19,12 +19,12 @@
 {% block title %}Update{% endblock %}
 {% block menu %}
     <li class="nav-item active">
-                <a class="nav-link" href="{% url 'view' project.pk %}">Отмена <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'webapp:view' project.pk %}">Отмена <span class="sr-only">(current)</span></a>
               </li>
 {% endblock %}
 {% block content %}
 <div class="col-6">
-<form action="{% url 'update_project' project.pk %}" method="POST">
+<form action="{% url 'webapp:update_project' project.pk %}" method="POST">
     {% csrf_token %}
     {% for error in form.non_field_errors %}
     <p class="error">{{ error }}</p>
