@@ -26,19 +26,7 @@ class TaskForm(forms.ModelForm):
                    'status': forms.RadioSelect,
                    'type_task': forms.CheckboxSelectMultiple}
 
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     errors = []
-    #     summary = cleaned_data.get('summary')
-    #     description = cleaned_data.get('description')
-    #     if summary:
-    #         if summary == description:
-    #             errors.append(ValidationError('Название и Описание не должны быть одинаковыми'))
-    #         if len(description) < len(summary):
-    #             errors.append('Описание не должны быть короче Заголовка')
-    #         if errors:
-    #             raise ValidationError(errors)
-    #     return cleaned_data
+
 
     def clean_summary(self):
         errors = []
@@ -70,3 +58,10 @@ class ProjectForm(forms.ModelForm):
                    'description': forms.Textarea(attrs={'class': "form-control"}),
                    'start_date': forms.SelectDateWidget,
                    'finish_date': forms.SelectDateWidget}
+
+class TeamForm(forms.ModelForm):
+
+    class Meta:
+        model = Project
+        fields = ['team']
+        widgets = {'team': forms.CheckboxSelectMultiple}

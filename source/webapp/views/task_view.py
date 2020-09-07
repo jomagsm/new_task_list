@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import TemplateView, FormView, CreateView, UpdateView, DeleteView
@@ -31,30 +31,30 @@ class ViewTemplateView(TemplateView):
         return context
 
 
-class TaskCreateView(LoginRequiredMixin,FormView):
-    template_name = 'task/add_new.html'
-    form_class = TaskForm
-
-    def form_valid(self, form):
-        self.task = form.save()
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('view', kwargs={'pk': self.task.pk})
 
 
-class UpdateTemplateView(LoginRequiredMixin,UpdateView):
+class UpdateTemplateView(PermissionRequiredMixin,UpdateView):
     template_name = 'task/edit.html'
     form_class = TaskForm
     model = Task
+    permission_required = 'webapp.delete_task'
+
+    def has_permission(self):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        return super().has_permission() and self.request.user in project.team
 
     def get_success_url(self):
         return reverse('view_task', kwargs={'pk': self.object.pk})
 
 
-class DeleteTemplateView(LoginRequiredMixin,DeleteView):
+class DeleteTemplateView(PermissionRequiredMixin,DeleteView):
     template_name = 'task/delete.html'
     model = Task
+    permission_required = 'webapp.delete_task'
+
+    def has_permission(self):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        return super().has_permission() and self.request.user in project.team
 
     # def get_success_url(self):
     #     return reverse('view', kwargs={'pk': self.object.project_pk.pk})
@@ -71,10 +71,15 @@ def multi_delete(request):
     return redirect('index')
 
 
-class ProjectTaskCreateView(LoginRequiredMixin,CreateView):
+class ProjectTaskCreateView(PermissionRequiredMixin,CreateView):
     model = Task
     template_name = 'task/add_new.html'
     form_class = TaskForm
+    permission_required = 'webapp.add_task'
+
+    def has_permission(self):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        return super().has_permission() and self.request.user in project.team
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))

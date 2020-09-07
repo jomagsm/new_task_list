@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.validators import MinLengthValidator
 
@@ -42,6 +43,7 @@ class Task(models.Model):
 class Project(models.Model):
     start_date = models.DateField(verbose_name='Дата начала')
     finish_date = models.DateField(null=True, blank=True, verbose_name='Дата окончания')
+    team = models.ManyToManyField(get_user_model(), related_name='projects', verbose_name='Пользователь')
     name = models.CharField(max_length=200, null=False, blank=False, verbose_name='Название')
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Описание')
 
@@ -51,4 +53,12 @@ class Project(models.Model):
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
+        permissions = [('change_project_teams', 'Добавление пользователей в проект')
+        ]
 
+
+# class User_project(models.Model):
+#     user = models.ForeignKey(get_user_model(), on_delete=models.SET_DEFAULT, default=1,
+#                              related_name='users', verbose_name='пользователь')
+#     project = models.ForeignKey('webapp.Project', related_name='projects', verbose_name='Проект',
+#                                 on_delete=models.CASCADE)

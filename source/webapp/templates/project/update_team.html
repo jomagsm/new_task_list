@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Update_Team{% endblock %}
+{% block menu %}
+    <li class="nav-item active">
+                <a class="nav-link" href="{% url 'webapp:view' project.pk %}">Отмена <span class="sr-only">(current)</span></a>
+              </li>
+{% endblock %}
+{% block content %}
+<div class="col-6">
+<form action="{% url 'webapp:update_team' project.pk %}" method="POST">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    {% for field in form %}
+    {% include 'partial/task_form.html' with form=field %}
+    {% endfor %}
+    <input type="submit" value="Сохранить изменение">
+</form>
+</div>
+{% endblock %}

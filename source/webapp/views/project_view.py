@@ -1,9 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
-from webapp.forms import TaskForm, ProjectForm
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from webapp.forms import TaskForm, ProjectForm, TeamForm
 from webapp.models import Project, Task
 
 
@@ -73,13 +74,24 @@ class ProjectView(DetailView):
 
 
 
-class ProjectCreate(LoginRequiredMixin,CreateView):
+class ProjectCreate(PermissionRequiredMixin,CreateView):
     template_name = 'project/create.html'
     model = Project
     fields = ['name', 'description', 'start_date', 'finish_date']
+    permission_required = 'webapp.add_project'
+
+
+    def form_valid(self, form):
+        # print(self.request.user)
+        project = form.save()
+        users = get_user_model().objects.all()
+        user = users.filter(pk=self.request.user.pk)
+        project.team.set(user)
+        return super().form_valid(form)
+
 
     def get_success_url(self):
-        return reverse('view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:view', kwargs={'pk': self.object.pk})
 
 
 
@@ -125,16 +137,32 @@ class ProjectCreate(LoginRequiredMixin,CreateView):
 #
 
 
-class ProjectUpdateView(LoginRequiredMixin,UpdateView):
+class ProjectUpdateView(PermissionRequiredMixin,UpdateView):
     template_name = 'project/update.html'
     form_class = ProjectForm
     model = Project
+    permission_required = 'webapp.add_project'
 
     def get_success_url(self):
-        return reverse('view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:view', kwargs={'pk': self.object.pk})
 
 
-class ProjectDeleteView(LoginRequiredMixin,DeleteView):
+class ProjectDeleteView(PermissionRequiredMixin,DeleteView):
     template_name = 'project/delete.html'
     model = Project
-    success_url = reverse_lazy('index_project')
+    success_url = reverse_lazy('webapp:index_project')
+    permission_required = 'webapp.add_project'
+
+
+class TeamUpdate(PermissionRequiredMixin,UpdateView):
+    template_name = 'project/update_team.html'
+    form_class = TeamForm
+    model = Project
+    permission_required = 'webapp.change_project_teams'
+
+    def has_permission(self):
+        project = self.object
+        return super().has_permission() and self.request.user in project.team
+
+    def get_success_url(self):
+        return reverse('webapp:view', kwargs={'pk': self.object.pk})

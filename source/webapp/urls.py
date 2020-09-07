@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 
-from webapp.views import IndexView, ProjectView, ProjectCreate, ProjectUpdateView, ProjectDeleteView
-from webapp.views.task_view import IndexTemplateView, ViewTemplateView, TaskCreateView, UpdateTemplateView, \
+from webapp.views import IndexView, ProjectView, ProjectCreate, ProjectUpdateView, ProjectDeleteView, TeamUpdate
+from webapp.views.task_view import IndexTemplateView, ViewTemplateView, UpdateTemplateView, \
     DeleteTemplateView, \
     multi_delete, ProjectTaskCreateView
 
@@ -19,4 +19,5 @@ urlpatterns = [
     path('delete_project/<int:pk>', ProjectDeleteView.as_view(), name='delete_project'),
     path('delete_task/<int:pk>', DeleteTemplateView.as_view(), name='delete_task'),
     path('multi_delete/', multi_delete, name='multi_delete'),
+    path('update_team/<int:pk>', TeamUpdate.as_view(), name='update_team')
 ]

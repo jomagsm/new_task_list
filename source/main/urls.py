@@ -16,12 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from django.contrib.auth.views import LoginView, LogoutView
-from webapp.views import IndexView, ProjectView, ProjectCreate, ProjectUpdateView, ProjectDeleteView
-from webapp.views.task_view import IndexTemplateView, ViewTemplateView, TaskCreateView, UpdateTemplateView, DeleteTemplateView, \
-    multi_delete, ProjectTaskCreateView
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
