@@ -3,12 +3,12 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from webapp.forms import TaskForm, ProjectForm, TeamForm
 from webapp.models import Project, Task
 
 
-class IndexView(ListView):
+class IndexView(LoginRequiredMixin,ListView):
     template_name = 'project/index.html'
     context_object_name = 'projects'
     paginate_by = 5
@@ -56,7 +56,10 @@ class ProjectView(DetailView):
         # tasks = Task.objects.all()
         # project = self.object
         # tasks = tasks.filter(project_pk=project.pk)
-        context['tasks'] = tasks
+        if self.request.user in self.get_object().team.all():
+            context['tasks'] = tasks
+        else:
+            context['tasks'] = None
         context['page_obj'] = page
         context['is_paginated'] = is_paginated
         return context
@@ -159,10 +162,17 @@ class TeamUpdate(PermissionRequiredMixin,UpdateView):
     form_class = TeamForm
     model = Project
     permission_required = 'webapp.change_project_teams'
+    # def get(self, request, *args, **kwargs):
+    #     project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+    #     if self.request.user in project.team.all():
+    #
+    #     return
+    #     user = self.request.user
+    #
 
     def has_permission(self):
-        project = self.object
-        return super().has_permission() and self.request.user in project.team
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        return super().has_permission() and self.request.user in project.team.all()
 
     def get_success_url(self):
         return reverse('webapp:view', kwargs={'pk': self.object.pk})

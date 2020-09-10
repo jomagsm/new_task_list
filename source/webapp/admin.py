@@ -1,6 +1,7 @@
 from django.apps import AppConfig
 from django.contrib import admin
 
+
 from webapp.models import Status, Task_type, Task, Project
 
 

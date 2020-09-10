@@ -1,8 +1,4 @@
 <div class="form-group">
-{#{% for choice_id, choice_label in field.field.choices %}#}
-{#        <p>{{choice_id}}#}
-{#    {{choice_label}}</p>#}
-{#            {% endfor %}#}
         <div class="form-group">
             <label for="name">{{ form.label}}</label>
 {#                <input type="text" name="{{ form.name.name }}" class="form-control" id="name" placeholder="Введите название"#}
@@ -11,7 +7,5 @@
             {% for error in form.errors %}
             <p class="text-danger">{{ error }}</p>
             {% endfor %}
-
-
         </div>
     </div>

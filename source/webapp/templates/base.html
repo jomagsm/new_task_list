@@ -20,11 +20,13 @@
                 {% block menu %}
                 {% endblock %}
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item active">
+                    {% if perms.webapp.add_project %}
+                        <li class="nav-item active">
                         <a class="nav-link" href="{% url 'webapp:create_project' %}">Создать проект<span
                                 class="sr-only">(current)</span></a>
-                        {#        <a class="nav-link" href="{% url 'add_task' %}">Добавить задачу <span class="sr-only">(current)</span></a>#}
-                    </li>
+                            {#        <a class="nav-link" href="{% url 'add_task' %}">Добавить задачу <span class="sr-only">(current)</span></a>#}
+                </li>
+                    {% endif %}
                     <li><a class="nav-link"
                            href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
                 {% else %}

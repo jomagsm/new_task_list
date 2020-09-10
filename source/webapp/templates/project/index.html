@@ -19,6 +19,7 @@
         {% for project in projects%}
         <input class="ml-4" type="checkbox" name="id" value="{{ project.pk }}">
             {% if request.user.is_authenticated %}
+                {% if perms.webapp.delete_project %}
         <a class=" btn btn-outline-dark btn-sm mb-1 mr-2" href=" {% url 'webapp:delete_project' project.pk %}" role="button">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
@@ -27,6 +28,8 @@
                       d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
             </svg>
         </a>
+                    {% endif %}
+                {% if perms.webapp.change_project %}
         <a class=" btn btn-outline-dark btn-sm mb-1 mr-2" href=" {% url 'webapp:update_project' project.pk %}" role="button">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor"
                  xmlns="http://www.w3.org/2000/svg">
@@ -36,6 +39,7 @@
                       d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
             </svg>
         </a>
+                    {% endif %}
             {% endif %}
         <a href="{% url 'webapp:view' project.pk %}"> {{ project.name }} | {{ project.description }}</a><br>
     {% endfor %}

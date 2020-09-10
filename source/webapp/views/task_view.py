@@ -41,10 +41,10 @@ class UpdateTemplateView(PermissionRequiredMixin,UpdateView):
 
     def has_permission(self):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
-        return super().has_permission() and self.request.user in project.team
+        return super().has_permission() and self.request.user in project.team.all()
 
     def get_success_url(self):
-        return reverse('view_task', kwargs={'pk': self.object.pk})
+        return reverse('webapp:view_task', kwargs={'pk': self.object.pk})
 
 
 class DeleteTemplateView(PermissionRequiredMixin,DeleteView):
@@ -54,7 +54,7 @@ class DeleteTemplateView(PermissionRequiredMixin,DeleteView):
 
     def has_permission(self):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
-        return super().has_permission() and self.request.user in project.team
+        return super().has_permission() and self.request.user in project.team.all()
 
     # def get_success_url(self):
     #     return reverse('view', kwargs={'pk': self.object.project_pk.pk})
@@ -63,7 +63,7 @@ class DeleteTemplateView(PermissionRequiredMixin,DeleteView):
         self.object = self.get_object()
         self.object.is_deleted = True
         self.object.save()
-        return redirect('view', pk=self.object.project_pk.pk)
+        return redirect('webapp:view', pk=self.object.project_pk.pk)
 
 def multi_delete(request):
     data= request.POST.getlist('id')
@@ -79,14 +79,14 @@ class ProjectTaskCreateView(PermissionRequiredMixin,CreateView):
 
     def has_permission(self):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
-        return super().has_permission() and self.request.user in project.team
+        return super().has_permission() and self.request.user in project.team.all()
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
         task = form.save(commit=False)
         task.project_pk = project
         task.save()
-        return redirect('view', pk=project.pk)
+        return redirect('webapp:view', pk=project.pk)
 
 
 

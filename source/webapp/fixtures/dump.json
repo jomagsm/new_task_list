@@ -1,4 +1,3 @@
-Зашел Зашел Зашел
 [
 {
   "model": "webapp.status",
@@ -51,8 +50,10 @@
     "description": "Test kdsfl.mfgdh\r\nfdghgfdh\r\ndfghdfgh\r\n\r\nsdfgsf\r\ngfhsffgh\r\nsdfgdff",
     "status": 2,
     "created_at": "2020-08-04T16:05:43.628Z",
-    "updated_at": "2020-08-15T12:41:49.815Z",
+    "updated_at": "2020-08-27T12:12:57.313Z",
+    "is_deleted": true,
     "type_task": [
+      1,
       2
     ]
   }
@@ -66,7 +67,8 @@
     "description": "dsfafsddfas\r\nafddsafds\r\nasdfadsfd",
     "status": 2,
     "created_at": "2020-08-04T16:06:04.542Z",
-    "updated_at": "2020-08-15T12:41:49.815Z",
+    "updated_at": "2020-08-27T12:14:24.000Z",
+    "is_deleted": true,
     "type_task": [
       2
     ]
@@ -81,9 +83,11 @@
     "description": "xcmxmxmvkklsdkfj",
     "status": 1,
     "created_at": "2020-08-04T16:07:18.797Z",
-    "updated_at": "2020-08-15T12:41:49.815Z",
+    "updated_at": "2020-08-27T12:09:27.528Z",
+    "is_deleted": true,
     "type_task": [
-      2
+      2,
+      3
     ]
   }
 },
@@ -96,7 +100,8 @@
     "description": "sdfgdfsfgdsgsd",
     "status": 2,
     "created_at": "2020-08-04T16:07:42.929Z",
-    "updated_at": "2020-08-15T12:41:49.815Z",
+    "updated_at": "2020-08-27T12:17:35.910Z",
+    "is_deleted": true,
     "type_task": [
       1
     ]
@@ -111,7 +116,8 @@
     "description": "sdfsadfd",
     "status": 3,
     "created_at": "2020-08-04T16:08:02.530Z",
-    "updated_at": "2020-08-15T12:41:49.815Z",
+    "updated_at": "2020-08-27T12:18:59.084Z",
+    "is_deleted": true,
     "type_task": [
       1
     ]
@@ -126,7 +132,8 @@
     "description": "dsffsdf2",
     "status": 2,
     "created_at": "2020-08-05T04:06:52.214Z",
-    "updated_at": "2020-08-15T15:29:53.827Z",
+    "updated_at": "2020-08-27T12:19:07.597Z",
+    "is_deleted": true,
     "type_task": [
       1
     ]
@@ -142,40 +149,9 @@
     "status": 2,
     "created_at": "2020-08-10T06:48:24.699Z",
     "updated_at": "2020-08-15T12:41:49.815Z",
+    "is_deleted": false,
     "type_task": [
       3
-    ]
-  }
-},
-{
-  "model": "webapp.task",
-  "pk": 11,
-  "fields": {
-    "project_pk": 1,
-    "summary": "Test",
-    "description": "gery",
-    "status": 1,
-    "created_at": "2020-08-10T07:52:12.813Z",
-    "updated_at": "2020-08-15T12:41:49.815Z",
-    "type_task": [
-      1,
-      2,
-      3
-    ]
-  }
-},
-{
-  "model": "webapp.task",
-  "pk": 12,
-  "fields": {
-    "project_pk": 1,
-    "summary": "Test334534",
-    "description": "345dfgd jhgjghhj\r\nythjtyjy",
-    "status": 2,
-    "created_at": "2020-08-10T07:56:24.339Z",
-    "updated_at": "2020-08-15T12:41:49.815Z",
-    "type_task": [
-      2
     ]
   }
 },
@@ -189,6 +165,7 @@
     "status": 3,
     "created_at": "2020-08-15T15:37:18.463Z",
     "updated_at": "2020-08-15T15:52:30.156Z",
+    "is_deleted": false,
     "type_task": [
       1,
       2
@@ -199,30 +176,15 @@
   "model": "webapp.task",
   "pk": 14,
   "fields": {
-    "project_pk": 1,
+    "project_pk": 3,
     "summary": "Summary Description",
     "description": "Summary Description",
     "status": 3,
     "created_at": "2020-08-15T16:33:30.138Z",
-    "updated_at": "2020-08-15T16:34:31.167Z",
+    "updated_at": "2020-09-10T11:17:34.850Z",
+    "is_deleted": false,
     "type_task": [
       2
-    ]
-  }
-},
-{
-  "model": "webapp.task",
-  "pk": 15,
-  "fields": {
-    "project_pk": 1,
-    "summary": "Testdsgdfdfsdgfgfghshsfddfg",
-    "description": "sdfsdfsdgsgdsdgsdgggsdsdgdsfggdfsgd",
-    "status": 1,
-    "created_at": "2020-08-21T15:00:06.819Z",
-    "updated_at": "2020-08-21T17:01:05.459Z",
-    "type_task": [
-      2,
-      3
     ]
   }
 },
@@ -236,6 +198,7 @@
     "status": 2,
     "created_at": "2020-08-22T09:56:15.394Z",
     "updated_at": "2020-08-22T09:56:15.394Z",
+    "is_deleted": false,
     "type_task": []
   }
 },
@@ -248,7 +211,8 @@
     "description": "TestTestTestTestTestTestTestTestTestTestTestTestTest",
     "status": 3,
     "created_at": "2020-08-22T09:58:21.256Z",
-    "updated_at": "2020-08-22T09:58:21.256Z",
+    "updated_at": "2020-08-27T12:08:01.431Z",
+    "is_deleted": true,
     "type_task": []
   }
 },
@@ -262,6 +226,35 @@
     "status": 3,
     "created_at": "2020-08-22T09:59:44.984Z",
     "updated_at": "2020-08-22T09:59:44.984Z",
+    "is_deleted": false,
+    "type_task": []
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 19,
+  "fields": {
+    "project_pk": 21,
+    "summary": "Testwefrew",
+    "description": "dfgweewgwegregrweg",
+    "status": 3,
+    "created_at": "2020-09-10T11:19:37.955Z",
+    "updated_at": "2020-09-10T11:19:37.955Z",
+    "is_deleted": false,
+    "type_task": []
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 20,
+  "fields": {
+    "project_pk": 21,
+    "summary": "Testwefrew",
+    "description": "dfgweewgwegregrweg",
+    "status": 3,
+    "created_at": "2020-09-10T11:21:21.906Z",
+    "updated_at": "2020-09-10T11:21:21.906Z",
+    "is_deleted": false,
     "type_task": []
   }
 },
@@ -269,58 +262,96 @@
   "model": "webapp.project",
   "pk": 1,
   "fields": {
-    "start_date": null,
-    "finish_date": null,
+    "start_date": "2020-05-10",
+    "finish_date": "2020-08-27",
     "name": "Test Project",
-    "description": "Teste Projects"
+    "description": "Teste Projects",
+    "team": [
+      1,
+      2,
+      4,
+      5,
+      6,
+      7
+    ]
   }
 },
 {
   "model": "webapp.project",
   "pk": 3,
   "fields": {
-    "start_date": "2020-05-10",
-    "finish_date": "2010-05-11",
+    "start_date": "2020-04-10",
+    "finish_date": "2028-05-11",
     "name": "Test2",
-    "description": "Test2Test2Test2Test2"
+    "description": "Test2Test2Test2Test2",
+    "team": [
+      2,
+      7
+    ]
   }
 },
 {
   "model": "webapp.project",
-  "pk": 4,
+  "pk": 6,
   "fields": {
     "start_date": "2020-05-10",
     "finish_date": "2010-05-11",
-    "name": "Test2",
-    "description": "Test2Test2Test2Test2"
+    "name": "Test333",
+    "description": "test 33333 3tttt3 t3ttt33",
+    "team": []
   }
 },
 {
   "model": "webapp.project",
-  "pk": 5,
+  "pk": 19,
   "fields": {
-    "start_date": null,
-    "finish_date": null,
-    "name": "dsfdsfsdsfddsfdfsfsddsf",
-    "description": "sdfdsffsdbgdffsefdsgdfsgfds"
+    "start_date": "2020-05-10",
+    "finish_date": "2010-05-11",
+    "name": "fgwewerrewerw",
+    "description": "ryrterttwwerwe",
+    "team": [
+      1
+    ]
   }
 },
 {
-  "model": "auth.user",
-  "pk": 1,
+  "model": "webapp.project",
+  "pk": 20,
   "fields": {
-    "password": "pbkdf2_sha256$150000$FElQQ4SG4NRr$HKS+lHYe4wupGRo3OCbqDrA2TBqtQS/Cbq6aO24uBdE=",
-    "last_login": "2020-08-21T14:38:17.112Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2020-08-04T14:46:59.092Z",
-    "groups": [],
-    "user_permissions": []
+    "start_date": "2020-05-10",
+    "finish_date": "2010-05-10",
+    "name": "manage",
+    "description": "manage project",
+    "team": [
+      5
+    ]
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 21,
+  "fields": {
+    "start_date": "2020-05-10",
+    "finish_date": "2010-05-11",
+    "name": "dev project",
+    "description": "dev projectdev project",
+    "team": [
+      1,
+      7
+    ]
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 22,
+  "fields": {
+    "start_date": "2020-05-10",
+    "finish_date": "2010-05-10",
+    "name": "tessss",
+    "description": "fdggfddgssdf",
+    "team": [
+      1
+    ]
   }
 }
 ]

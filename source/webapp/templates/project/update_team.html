@@ -14,9 +14,17 @@
     <p class="error">{{ error }}</p>
     {% endfor %}
     {% for field in form %}
-    {% include 'partial/task_form.html' with form=field %}
+            {% include 'partial/task_form.html' with form=field %}
     {% endfor %}
     <input type="submit" value="Сохранить изменение">
 </form>
+{#<p>{{ request.user }}</p>#}
+{#<p>{{ project.team.all }}</p>#}
 </div>
 {% endblock %}
+
+{#--natural-foreign:./manage.py dumpdata --indent=2 --natural-foreign auth.user auth.group > fixtures/auth.json#}
+{#./manage.py dumpdata --indent=2 --natural-foreign auth.user auth.group > webapp/fixtures/auth.json#}
+{#./manage.py dumpdata --indent=2 webapp > webapp/fixtures/dump.json#}
+
+
