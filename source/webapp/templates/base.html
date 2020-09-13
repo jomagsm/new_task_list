@@ -20,7 +20,10 @@
                 {% block menu %}
                 {% endblock %}
                 {% if request.user.is_authenticated %}
-                    {% if perms.webapp.add_project %}
+                    {% if perms.accounts.view_users_list %}
+                    <li><a class="nav-link"href="{% url 'accounts:user_list' %}">Список пользователей</a></li>
+                    {% endif %}
+                        {% if perms.webapp.add_project %}
                         <li class="nav-item active">
                         <a class="nav-link" href="{% url 'webapp:create_project' %}">Создать проект<span
                                 class="sr-only">(current)</span></a>
@@ -29,6 +32,7 @@
                     {% endif %}
                     <li><a class="nav-link"
                            href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
+                    <li><a class="nav-link" href="{% url 'accounts:detail' request.user.pk %}">Привет, {{ request.user.get_full_name|default:request.user.username }}</a></li>
                 {% else %}
                     {% if request.GET.next %}
                         <li><a class="nav-link" href="{% url 'accounts:login' %}?next={{ request.GET.next }}">Login</a>

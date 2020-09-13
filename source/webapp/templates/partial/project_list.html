@@ -1,0 +1,30 @@
+{% if is_paginated %}
+    {% include 'partial/pagination.html' %}
+{% endif %}
+{% for project in projects %}
+    <div class="box">
+        <h5><a href="{% url "webapp:view" project.pk %}">{{ project.name }}</a></h5>
+{#        <p>#}
+{#            <label for="selected_articles-{{ project.pk }}">Select:</label>#}
+{#            <input type="checkbox" name="selected_articles"#}
+{#                   id="selected_articles-{{ project.pk }}" value="{{ project.pk }}">#}
+{#        </p>#}
+        <p>Описание: {{ project.description }}</p>
+{#        <p>#}
+{#            <a href="{% url 'accounts:detail' article.author_id %}">{{ article.author }}</a>#}
+{#            | {{ article.created_at|date:"d.m.Y H:i:s" }}#}
+{#        </p>#}
+{#        <p>Published at: {{ article.publish_at|date:"d.m.Y H:i:s" }}</p>#}
+{#        {% if perms.webapp.change_article or article.author == request.user %}#}
+{#            <p><a href="{% url 'article_update' article.pk %}">Update</a></p>#}
+{#        {% endif %}#}
+{#        {% if perms.webapp.delete_article or article.author == request.user %}#}
+{#            <p><a href="{% url 'article_delete' article.pk %}">Delete</a></p>#}
+{#        {% endif %}#}
+    </div>
+{% empty %}
+    <h2 class="text-center">Нет проектов</h2>
+{% endfor %}
+{% if is_paginated %}
+     {% include 'partial/pagination.html' %}
+{% endif %}

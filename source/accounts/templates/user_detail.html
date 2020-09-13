@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Пользователь{% endblock %}
+{% block menu_links %}
+    <li><a href="#">Редактировать</a></li>
+    <li><a href="#">Смена пароля</a></li>
+{% endblock %}
+{% block content %}
+
+<div class="card mb-3, mt-2" style="max-width: 100%;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+        {% if user_obj.profile.avatar %}
+        <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="250" height="auto" alt="user picture">
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+          <h5 class="card-title">Личная страница пользователя: {{ user_obj.get_full_name|default:user_obj.username }}</h5>
+          <p class="card-text">Имя пользователя: {{ user_obj.username }}</p>
+          <p class="card-text">{{ user_obj.profile.about_me }}</p>
+          <a href="{{ user_obj.profile.url }}">Профиль в Git </a>
+          <h5 class="text-center clear">Список проектов в которых участвует:</h5>
+            {% include 'partial/project_list.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{#    <h3>Статья автора:</h3>#}
+{#    {% include 'partial/article_list.html' with articles=user_obj.articles.all%}#}

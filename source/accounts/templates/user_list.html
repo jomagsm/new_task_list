@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Список пользователей{% endblock %}
+{% block menu_links %}
+{% endblock %}
+{% block content %}
+<table class="table mt-2">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Пользователь</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in user_list %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td><p><a href="{% url 'accounts:detail' user.pk %}">{{ user }}</a></p>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

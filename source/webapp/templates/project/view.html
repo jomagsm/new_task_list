@@ -69,7 +69,7 @@
         <h3>Пользователи в проекте:</h3>
 
         {% for user in project.team.all %}
-        <p>{{ user }}</p>
+            <p><a href="{% url 'accounts:detail' user.pk %}">{{ user }}</a></p>
     {% endfor %}
     </div>
 {% endblock %}
