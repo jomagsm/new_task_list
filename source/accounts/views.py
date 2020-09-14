@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from accounts.forms import MyUserCreationForm
+from accounts.models import Profile
 
 
 def login_view(request):
@@ -36,8 +37,7 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        # user.save()
-        # Profile.objects.create(user=user)
+        Profile.objects.create(user=user)
         return redirect(self.get_success_url())
 
     def get_success_url(self):
