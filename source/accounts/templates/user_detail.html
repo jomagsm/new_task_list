@@ -18,6 +18,11 @@
           <h5 class="card-title">Личная страница пользователя: {{ user_obj.get_full_name|default:user_obj.username }}</h5>
           <p class="card-text">Имя пользователя: {{ user_obj.username }}</p>
           <p class="card-text">{{ user_obj.profile.about_me }}</p>
+          {% if user_obj.profile.url %}
+          <a href="{{ user_obj.profile.url }}">Профиль в Git </a>
+          {% else %}
+          <a href="#">Профиль в Git </a>
+          {% endif %}
           <a href="{{ user_obj.profile.url }}">Профиль в Git </a>
           <h5 class="text-center clear">Список проектов в которых участвует:</h5>
             {% include 'partial/project_list.html' %}
