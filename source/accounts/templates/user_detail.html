@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Пользователь{% endblock %}
 {% block menu %}
+    {% if request.user == user_obj %}
     <li class="nav-item active">
         <a class="nav-link" href="{% url 'accounts:change' user_obj.pk %}">Редактировать <span
                 class="sr-only">(current)</span></a>
@@ -9,6 +10,7 @@
         <a class="nav-link" href="{% url "accounts:password_change" user_obj.pk %}">Смена пароля <span
                 class="sr-only">(current)</span></a>
     </li>
+    {% endif %}
 {% endblock %}
 {% block content %}
 
